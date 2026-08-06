@@ -241,8 +241,8 @@
     flex-wrap: wrap;
     padding: 0;
     justify-content: space-between;
-    overflow-y: hidden;
-    height: 380px;
+    overflow: visible;
+    height: auto;
   }
   #principal #feed #main .feedPlaylist .playlists li {
     width: 15%;
@@ -297,22 +297,22 @@
   } */
   @media only screen and (max-width: 2130px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 360px;
+      height: auto;
     }
   }
   @media only screen and (max-width: 1920px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 320px;
+      height: auto;
     }
   }
   @media only screen and (max-width: 1730px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 300px;
+      height: auto;
     }
   }
   @media only screen and (max-width: 1512px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 295px;
+      height: auto;
     }
     #principal #feed #main .feedPlaylist .playlists li {
       width: 18%;
@@ -320,7 +320,7 @@
   }
   @media only screen and (max-width: 1324px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 310px;
+      height: auto;
     }
     #principal #feed #main .feedPlaylist .playlists li {
       width: 23%;
@@ -328,7 +328,7 @@
   }
   @media only screen and (max-width: 996px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 295px;
+      height: auto;
     }
     #principal #feed #main .feedPlaylist .playlists li {
       width: 32%;
@@ -336,7 +336,7 @@
   }
   @media only screen and (max-width: 796px) {
     #principal #feed #main .feedPlaylist .playlists {
-      height: 310px;
+      height: auto;
     }
     #principal #feed #main .feedPlaylist .playlists li {
       width: 48%;
@@ -548,4 +548,100 @@
 #user_bttn {
   display: flex;
   flex-direction: column;
+}
+/* ---- Player additions ---- */
+.song-item {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Highlight the card of the track that is currently playing */
+.song-item.playing {
+  outline: 2px solid #1db954;
+  outline-offset: 4px;
+}
+
+/* Like / unlike heart shown on each song card and in the player bar */
+.like-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  padding: 4px;
+}
+.like-btn:hover {
+  color: #fff;
+}
+.like-btn.active {
+  color: #1db954;
+}
+
+/* Fixed mini-player used on the search / all-songs / liked pages */
+.compact-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #181818;
+  border-top: 1px solid #282828;
+}
+.compact-player #audioBar {
+  padding: 10px 24px;
+}
+
+/* ---- Navbar search box (All Songs / Search pages) ---- */
+#topNav {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#arrowMenu {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.div--hun {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Let the form grow and shrink instead of sitting at a fixed 10% width. */
+.form--hun {
+  width: auto;
+  float: none;
+  margin-left: 12px;
+  min-width: 0;
+}
+
+/* Override the hard-coded 350px input so it fits the navbar responsively. */
+.form--hun input {
+  width: 100% !important;
+  max-width: 380px;
+  float: none !important;
+  box-sizing: border-box;
+  display: block;
+}
+
+/* Keep the user profile pinned to the right edge. */
+#btnTopNav {
+  flex-shrink: 0;
+}
+
+/* ---- Artist page header ---- */
+.artistHeader {
+  min-height: 220px;
+  padding: 16px;
+  background: linear-gradient(to bottom, rgba(120, 120, 255, 0.35), transparent);
+}
+
+.artistHeader-img {
+  width: 192px;
+  height: 192px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }

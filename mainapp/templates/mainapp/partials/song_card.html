@@ -1,0 +1,25 @@
+{% comment %}
+Playable song card. The data-* attributes let player.js load the track,
+and the heart button toggles the user's "Liked Songs".
+{% endcomment %}
+<li class="song-item"
+    data-id="{{ song.id }}"
+    data-audio="{{ song.audio_file.url }}"
+    data-title="{{ song.title }}"
+    data-artist="{{ song.artist.name }}"{% if song.image %}
+    data-image="{{ song.image.url }}"{% endif %}>
+  {% if song.image %}<img src="{{ song.image.url }}" alt="{{ song.title }}">{% endif %}
+  <button type="button" class="btn me-2 play-btn" title="Play">
+    <svg role="img" height="24" width="24" viewBox="0 0 24 24">
+      <path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path>
+    </svg>
+  </button>
+  <button type="button" class="like-btn me-2 {% if song.id in liked_song_ids %}active{% endif %}"
+          data-like="{{ song.id }}" title="Add to Liked Songs">
+    <svg role="img" height="16" width="16" viewBox="0 0 16 16">
+      <path d="M15.724 4.22A4.313 4.313 0 0012.192.814a4.269 4.269 0 00-3.622 1.13.837.837 0 01-1.14 0 4.272 4.272 0 00-6.21 5.855l5.916 7.05a1.128 1.128 0 001.727 0l5.916-7.05a4.228 4.228 0 00.945-3.577z"></path>
+    </svg>
+  </button>
+  <span>{{ song.title }}</span>
+  <p><br><a href="{% url 'artist_detail' song.artist.id %}" class="text-decoration-none text-muted">{{ song.artist.name }}</a></p>
+</li>
