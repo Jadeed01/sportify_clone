@@ -773,3 +773,65 @@ body,
   display: flex;
   flex-direction: column;
 }
+
+/* ---- Player additions ---- */
+.song-item {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Highlight the card of the track that is currently playing */
+.song-item.playing {
+  outline: 2px solid #1db954;
+  outline-offset: 4px;
+}
+
+/* Like / unlike heart shown on each song card and in the player bar */
+.like-btn {
+  background: transparent;
+  border: none;
+  color: #b3b3b3;
+  cursor: pointer;
+  padding: 4px;
+}
+.like-btn:hover {
+  color: #fff;
+}
+.like-btn.active {
+  color: #1db954;
+}
+
+/* Fixed mini-player used on the search / all-songs / liked pages */
+.compact-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #181818;
+  border-top: 1px solid #282828;
+}
+.compact-player #audioBar {
+  padding: 10px 24px;
+}
+
+/* ---- Fixed, consistent image sizes for every music tile (home page) ----
+   Cards get a fixed width and images a fixed box, so every song card
+   renders at exactly the same size. Also stops the clipped rows. */
+#principal #feed #main .feedPlaylist .playlists {
+  justify-content: flex-start;
+  gap: 20px;
+  height: auto;
+  overflow: visible;
+}
+
+#principal #feed #main .feedPlaylist .playlists li {
+  width: 200px;
+  margin-bottom: 100px;
+}
+
+#principal #feed #main .feedPlaylist .playlists li img {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover;
+}

@@ -645,3 +645,30 @@
   border-radius: 50%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
+
+/* ---- Fixed, consistent image sizes for every music tile ----
+   Cards get a fixed width and their images a fixed box, so
+   songs / albums / moods / playlists all look identical no matter
+   the source image dimensions or the screen size. */
+#principal #feed #main .feedPlaylist .playlists {
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+#principal #feed #main .feedPlaylist .playlists li {
+  width: 200px;
+  margin-bottom: 100px;
+}
+
+#principal #feed #main .feedPlaylist .playlists li img {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover;
+}
+
+/* The static "Browse all" chips use a fixed 160px; unify them too. */
+.image-hun {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: cover;
+}
