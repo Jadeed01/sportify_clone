@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-tsv*loiwp)lm@$e0fi_39=vfzb_6b=6&mne-wj=v1wepgx4=_)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['sportify-clone-6fwo.onrender.com']
+ALLOWED_HOSTS = ['lj-digital-concept.onrender.com','.onrender.com','*']
 
 # Where @login_required sends users who aren't signed in yet.
 LOGIN_URL = 'login'
@@ -81,17 +81,12 @@ WSGI_APPLICATION = 'sportify_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
