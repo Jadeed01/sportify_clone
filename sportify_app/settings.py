@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-tsv*loiwp)lm@$e0fi_39=vfzb_6b=6&mne-wj=v1wepgx4=_)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lj-digital-concept.onrender.com','.onrender.com','*']
+ALLOWED_HOSTS = ['https://sportify-clone-bvsw.onrender.com','.onrender.com','*']
 
 # Where @login_required sends users who aren't signed in yet.
 LOGIN_URL = 'login'
