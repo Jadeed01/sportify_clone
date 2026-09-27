@@ -22,12 +22,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tsv*loiwp)lm@$e0fi_39=vfzb_6b=6&mne-wj=v1wepgx4=_)'
+# Reads SECRET_KEY from Render's environment variable; falls back to this
+# insecure dev key only when running locally without that variable set.
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-tsv*loiwp)lm@$e0fi_39=vfzb_6b=6&mne-wj=v1wepgx4=_)'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Reads DEBUG from Render's environment variable. Locally, with no DEBUG
+# variable set, this defaults to False — set DEBUG=True in a local .env
+# or your shell if you want Django's debug pages while developing.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['https://sportify-clone-bvsw.onrender.com','.onrender.com','*']
+# Bare hostnames only — no https:// prefix, that's invalid here.
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# Fallback for local development.
+if not ALLOWED_HOSTS:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Where @login_required sends users who aren't signed in yet.
 LOGIN_URL = 'login'
@@ -81,12 +96,14 @@ WSGI_APPLICATION = 'sportify_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-
+# On Render: reads DATABASE_URL from the environment and connects to
+# Postgres. Locally, with no DATABASE_URL set, falls back to SQLite
+# so you don't need Postgres running on your own machine.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}',
+        conn_max_age=600
+    )
 }
 
 # Password validation
